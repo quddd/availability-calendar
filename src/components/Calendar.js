@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     border: `1px solid ${theme.palette.grey[300]}`,
     height: theme.spacing(6),
     minWidth: 34,
-    padding: theme.spacing(1, 1),
+    padding: theme.spacing(0, 1),
     fontSize: theme.spacing(1.5),
     cursor: "pointer",
   },
@@ -34,7 +34,7 @@ function WeekNames() {
   const classes = useStyles();
   return (
     <Grid container wrap='nowrap' justify='flex-start'>
-      {["S", "M", "T", "W", "T", "F", "S"].map((week, key) => (
+      {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((week, key) => (
         <Grid
           key={key}
           align='center'
@@ -68,7 +68,6 @@ function Calendar() {
 
   return (
     <div>
-      <h1> Calendar </h1>
       <Grid container>
         <IconButton>
           <NavigateBeforeIcon />
@@ -87,7 +86,7 @@ function Calendar() {
             <Grid
               key={key}
               xs={1}
-              align='center'
+              align='right'
               item
               className={`${classes.days} ${dayColor(day)}`}
               onClick={(e) => handleClick(e, day)}
