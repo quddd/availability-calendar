@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { takeMonth } from "../modules/calendar";
-import { Grid, makeStyles } from "@material-ui/core";
+import { Grid, IconButton, makeStyles, Typography } from "@material-ui/core";
 import { format, isPast, isSameDay, isSameMonth } from "date-fns";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
 const useStyles = makeStyles((theme) => ({
   days: {
@@ -67,6 +69,17 @@ function Calendar() {
   return (
     <div>
       <h1> Calendar </h1>
+      <Grid container>
+        <IconButton>
+          <NavigateBeforeIcon />
+        </IconButton>
+        <Typography component='h4' variant='h4'>
+          {format(currentDate, "MMMM-yyyy")}
+        </Typography>
+        <IconButton>
+          <NavigateNextIcon />
+        </IconButton>
+      </Grid>
       <WeekNames />
       {data.map((week, key) => (
         <Grid key={key} container wrap='nowrap' justify='flex-start'>
