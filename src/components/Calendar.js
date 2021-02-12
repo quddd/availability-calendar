@@ -76,6 +76,9 @@ function Calendar() {
   const nextMonth = () => {
     setCurrentDate(addMonths(currentDate, 1));
   };
+  const today = () => {
+    setCurrentDate(new Date());
+  };
   function WeekNames() {
     return (
       <Grid container wrap='nowrap'>
@@ -107,7 +110,7 @@ function Calendar() {
             <NavigateNextIcon />
           </IconButton>
           <ButtonGroup size='small' variant='contained' color='primary'>
-            <Button>Today</Button>
+            <Button onClick={today}>Today</Button>
             <Button> + </Button>
           </ButtonGroup>
         </Grid>
