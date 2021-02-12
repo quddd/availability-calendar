@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# React Availability Calendar
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Component allows users to select availability. Users can set availability for certain times during the day or for the whole day
 
 ## Available Scripts
 
