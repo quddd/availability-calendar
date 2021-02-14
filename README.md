@@ -1,6 +1,7 @@
 # React Availability Calendar
 
-Component allows users to select availability. Users can set availability for certain times during the day or for the whole day
+Component allows users to select availability. Users can set availability for certain times during the day or for the whole day.
+Calendar automatically disables past dates
 
 ## Available Scripts
 
