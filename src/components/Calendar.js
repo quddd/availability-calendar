@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(6),
     minWidth: 45,
     padding: theme.spacing(0, 1),
-    fontSize: theme.spacing(1.5),
+    fontSize: "calc(5px + 1vmin)",
     cursor: "pointer",
   },
   weekNames: {
@@ -98,13 +98,13 @@ function Calendar() {
   }
   return (
     <div>
-      <Paper className={classes.calendar}>
-        <Grid container spacing={0} alignItems='center'>
+      <div className={classes.calendar}>
+        <Grid container spacing={0} alignItems='center' justify='space-between'>
           <IconButton color='primary' onClick={prevMonth}>
             <NavigateBeforeIcon />
           </IconButton>
           <Typography component='h5' variant='h5'>
-            {format(currentDate, "MMM yyyy")}
+            {format(currentDate, "MMMM yyyy")}
           </Typography>
           <IconButton color='primary' onClick={nextMonth}>
             <NavigateNextIcon />
@@ -131,7 +131,7 @@ function Calendar() {
             ))}
           </Grid>
         ))}
-      </Paper>
+      </div>
     </div>
   );
 }
