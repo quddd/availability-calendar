@@ -20,6 +20,7 @@ import {
 } from "date-fns";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import Popup from "./Popup";
 
 const useStyles = makeStyles((theme) => ({
   days: {
@@ -52,6 +53,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [availability, setAvailability] = useState([]);
+  const [openPopup, setOpenPopup] = useState(false);
   const classes = useStyles();
   const data = takeMonth(currentDate)();
 
@@ -79,7 +82,7 @@ function Calendar() {
   const today = () => {
     setCurrentDate(new Date());
   };
-  function WeekNames() {
+  const WeekNames = () => {
     return (
       <Grid container wrap='nowrap'>
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((week, key) => (
@@ -95,7 +98,7 @@ function Calendar() {
         ))}
       </Grid>
     );
-  }
+  };
   return (
     <div>
       <div className={classes.calendar}>
@@ -111,7 +114,7 @@ function Calendar() {
           </IconButton>
           <ButtonGroup size='small' variant='contained' color='primary'>
             <Button onClick={today}>Today</Button>
-            <Button> + </Button>
+            <Button onClick={() => setOpenPopup(true)}> + </Button>
           </ButtonGroup>
         </Grid>
         <WeekNames />
@@ -132,6 +135,7 @@ function Calendar() {
           </Grid>
         ))}
       </div>
+      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}></Popup>
     </div>
   );
 }
