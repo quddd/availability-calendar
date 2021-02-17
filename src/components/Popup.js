@@ -17,18 +17,24 @@ function Popup(props) {
   const classes = useStyles();
 
   return (
-    <Dialog open={openPopup}>
-      <DialogTitle>
-        <div className={classes.title}>
-          <h3> Add Availability </h3>
-          <CancelIcon
-            color='secondary'
-            fontSize='large'
-            onClick={() => setOpenPopup(false)}
-          />
-        </div>
+    <Dialog
+      open={openPopup}
+      onClose={() => setOpenPopup(false)}
+      fullWidth
+      maxWidth='sm'
+    >
+      <DialogTitle disableTypography>
+        <Typography component='h6' variant='h6'>
+          Add Availability
+        </Typography>
+        <IconButton
+          className={classes.closeButton}
+          onClick={() => setOpenPopup(false)}
+        >
+          <CloseIcon />
+        </IconButton>
       </DialogTitle>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent dividers>{children}</DialogContent>
     </Dialog>
   );
 }
