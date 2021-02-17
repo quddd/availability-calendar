@@ -1,15 +1,19 @@
-import { Dialog, DialogTitle, DialogContent } from "@material-ui/core/";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Typography,
+  IconButton,
+} from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
-import CancelIcon from "@material-ui/icons/Cancel";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    cursor: "pointer",
-    borderBottom: "1px solid",
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
   },
 }));
 function Popup(props) {
@@ -17,18 +21,24 @@ function Popup(props) {
   const classes = useStyles();
 
   return (
-    <Dialog open={openPopup}>
-      <DialogTitle>
-        <div className={classes.title}>
-          <h3> Add Availability </h3>
-          <CancelIcon
-            color='secondary'
-            fontSize='large'
-            onClick={() => setOpenPopup(false)}
-          />
-        </div>
+    <Dialog
+      open={openPopup}
+      onClose={() => setOpenPopup(false)}
+      fullWidth
+      maxWidth='sm'
+    >
+      <DialogTitle disableTypography>
+        <Typography component='h6' variant='h6'>
+          Add Availability
+        </Typography>
+        <IconButton
+          className={classes.closeButton}
+          onClick={() => setOpenPopup(false)}
+        >
+          <CloseIcon />
+        </IconButton>
       </DialogTitle>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent dividers>{children}</DialogContent>
     </Dialog>
   );
 }
