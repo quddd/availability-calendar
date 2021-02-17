@@ -21,6 +21,7 @@ import {
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import Popup from "./Popup";
+import TimeForm from "./TimeForm";
 
 const useStyles = makeStyles((theme) => ({
   days: {
@@ -135,7 +136,9 @@ function Calendar() {
           </Grid>
         ))}
       </div>
-      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}></Popup>
+      <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
+        <TimeForm />
+      </Popup>
     </div>
   );
 }
