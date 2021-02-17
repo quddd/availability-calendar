@@ -12,10 +12,10 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   textField: {
-    marginRight: theme.spacing(3),
+    margin: theme.spacing(2),
   },
 }));
-function TimeForm() {
+function TimeForm({ selectedDate, availability, setAvailability }) {
   const [checked, setChecked] = useState(false);
   const [start, setStart] = useState("08:00");
   const [end, setEnd] = useState("16:00");
@@ -41,9 +41,18 @@ function TimeForm() {
   const handleEnd = (e) => {
     setEnd(e.target.value);
   };
+  const handleSubmit = () => {
+    const data = {
+      date: selectedDate,
+      start: start,
+      end: end,
+    };
+    setAvailability([...availability, data]);
+    console.log(availability);
+  };
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid container>
         <Grid item container justify='center'>
           <FormControlLabel
             control={
@@ -80,7 +89,7 @@ function TimeForm() {
           </FormControl>
         </Grid>
         <Grid item container justify='center'>
-          <Button color='primary' variant='contained'>
+          <Button color='primary' variant='contained' onClick={handleSubmit}>
             Add
           </Button>
         </Grid>

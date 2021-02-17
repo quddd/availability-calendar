@@ -137,7 +137,11 @@ function Calendar() {
         ))}
       </div>
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
-        <TimeForm />
+        <TimeForm
+          selectedDate={currentDate}
+          availability={availability}
+          setAvailability={setAvailability}
+        />
       </Popup>
     </div>
   );
