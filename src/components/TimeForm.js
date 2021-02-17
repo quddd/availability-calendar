@@ -6,11 +6,13 @@ import {
   Grid,
   TextField,
   makeStyles,
+  Divider,
+  Button,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(3),
   },
 }));
 function TimeForm() {
@@ -41,7 +43,7 @@ function TimeForm() {
   };
   return (
     <div>
-      <Grid container justify='center' spacing={3}>
+      <Grid container spacing={3}>
         <Grid item container justify='center'>
           <FormControlLabel
             control={
@@ -55,8 +57,8 @@ function TimeForm() {
             label='All day'
           />
         </Grid>
-        <Grid item className={classes.textField}>
-          <FormControl>
+        <Grid item container justify='center'>
+          <FormControl className={classes.textField}>
             <TextField
               id='start'
               label='From'
@@ -66,9 +68,7 @@ function TimeForm() {
               onChange={(e) => handleStart(e)}
             />
           </FormControl>
-        </Grid>
-        <Grid item className={classes.textField}>
-          <FormControl>
+          <FormControl className={classes.textField}>
             <TextField
               id='end'
               label='To'
@@ -78,6 +78,11 @@ function TimeForm() {
               onChange={(e) => handleEnd(e)}
             />
           </FormControl>
+        </Grid>
+        <Grid item container justify='center'>
+          <Button color='primary' variant='contained'>
+            Add
+          </Button>
         </Grid>
       </Grid>
     </div>
