@@ -143,7 +143,11 @@ function Calendar() {
         ))}
         <div>
           {availability.map((data, key) => (
-            <ul>{format(data.date, "d")}</ul>
+            <div>
+              <ul>{format(data.date, "dd MMMM, yyyy")}</ul>
+              <li>{data.start}</li>
+              <li>{data.end}</li>
+            </div>
           ))}
         </div>
       </div>
