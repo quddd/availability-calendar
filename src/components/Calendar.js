@@ -58,9 +58,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 700,
   },
   table: {
-    marginTop: theme.spacing(4),
-    maxHeight: 450,
-    width: 350,
+    marginTop: theme.spacing(2),
+    maxHeight: "40vh",
+    width: 400,
   },
 }));
 
@@ -114,7 +114,7 @@ function Calendar() {
   };
   return (
     <div>
-      <Grid container direction='row' spacing={3}>
+      <Grid container direction='row' spacing={1}>
         <Grid container item className={classes.calendar}>
           <Grid
             container
@@ -157,6 +157,9 @@ function Calendar() {
           ))}
         </Grid>
         <Grid item>
+          <Typography align='center' variant='h6' component='h6'>
+            Your current availability
+          </Typography>
           <TableContainer className={classes.table} component={Paper}>
             <Table>
               <TableHead>
