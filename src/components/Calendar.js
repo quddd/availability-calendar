@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(6),
     minWidth: 45,
     padding: theme.spacing(0, 1),
-    fontSize: "calc(5px + 1vmin)",
+    fontSize: "calc(3px + 1vmin)",
     cursor: "pointer",
   },
   weekNames: {
@@ -136,7 +136,7 @@ function Calendar() {
                 className={`${classes.days} ${dayColor(day)}`}
                 onClick={(e) => handleClick(e, day)}
               >
-                {format(day, "dd")}
+                {format(day, "d")}
               </Grid>
             ))}
           </Grid>
