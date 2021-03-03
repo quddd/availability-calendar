@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 700,
   },
   table: {
-    maxWidth: 100,
+    maxWidth: 500,
   },
 }));
 
