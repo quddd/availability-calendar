@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 700,
   },
   table: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(4),
+    maxHeight: 450,
     width: 350,
   },
 }));
