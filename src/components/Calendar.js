@@ -8,6 +8,12 @@ import {
   makeStyles,
   Paper,
   Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from "@material-ui/core";
 import {
   addMonths,
@@ -141,16 +147,30 @@ function Calendar() {
             ))}
           </Grid>
         ))}
-        <div>
-          {availability.map((data, key) => (
-            <div>
-              <ul>{format(data.date, "dd MMMM, yyyy")}</ul>
-              <li>{data.start}</li>
-              <li>{data.end}</li>
-            </div>
-          ))}
-        </div>
       </div>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label='simple table'>
+          <TableHead>
+            <TableRow>
+              <TableCell>Date </TableCell>
+              <TableCell align='right'>Start&nbsp;(HH)</TableCell>
+              <TableCell align='right'>End&nbsp;(HH)</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {availability.map((data, key) => (
+              <TableRow key={key}>
+                <TableCell component='th' scope='row'>
+                  {data.date}
+                </TableCell>
+                <TableCell align='right'>{data.start}</TableCell>
+                <TableCell align='right'>{data.end}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
         <TimeForm
           selectedDate={currentDate}
