@@ -8,6 +8,12 @@ import {
   makeStyles,
   Paper,
   Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from "@material-ui/core";
 import {
   addMonths,
@@ -20,23 +26,24 @@ import {
 } from "date-fns";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
 import Popup from "./Popup";
 import TimeForm from "./TimeForm";
 
 const useStyles = makeStyles((theme) => ({
   days: {
     border: `1px solid ${theme.palette.grey[300]}`,
-    height: theme.spacing(6),
-    minWidth: 45,
+    height: "10vh",
+    minWidth: 50,
     padding: theme.spacing(0, 1),
-    fontSize: "calc(5px + 1vmin)",
+    fontSize: "calc(3px + 1vmin)",
     cursor: "pointer",
   },
   weekNames: {
     color: theme.palette.common.white,
     background: theme.palette.info.light,
-    height: theme.spacing(4),
-    minWidth: 45,
+    height: "4vh",
+    minWidth: 50,
     padding: theme.spacing(0, 1),
     fontSize: theme.spacing(1.5),
   },
@@ -49,6 +56,11 @@ const useStyles = makeStyles((theme) => ({
   },
   calendar: {
     maxWidth: 700,
+  },
+  table: {
+    marginTop: theme.spacing(2),
+    maxHeight: "40vh",
+    width: 400,
   },
 }));
 
@@ -102,40 +114,86 @@ function Calendar() {
   };
   return (
     <div>
-      <div className={classes.calendar}>
-        <Grid container spacing={0} alignItems='center' justify='space-between'>
-          <IconButton color='primary' onClick={prevMonth}>
-            <NavigateBeforeIcon />
-          </IconButton>
-          <Typography component='h5' variant='h5'>
-            {format(currentDate, "MMMM yyyy")}
-          </Typography>
-          <IconButton color='primary' onClick={nextMonth}>
-            <NavigateNextIcon />
-          </IconButton>
-          <ButtonGroup size='small' variant='contained' color='primary'>
-            <Button onClick={today}>Today</Button>
-            <Button onClick={() => setOpenPopup(true)}> + </Button>
-          </ButtonGroup>
-        </Grid>
-        <WeekNames />
-        {data.map((week, key) => (
-          <Grid key={key} container wrap='nowrap'>
-            {week.map((day, key) => (
-              <Grid
-                key={key}
-                md={2}
-                align='right'
-                item
-                className={`${classes.days} ${dayColor(day)}`}
-                onClick={(e) => handleClick(e, day)}
-              >
-                {format(day, "d")}
-              </Grid>
-            ))}
+      <Grid container direction='row' spacing={1}>
+        <Grid container item className={classes.calendar}>
+          <Grid
+            container
+            item
+            spacing={0}
+            alignItems='center'
+            justify='center'
+            className={classes.controls}
+          >
+            <IconButton color='primary' onClick={prevMonth}>
+              <NavigateBeforeIcon />
+            </IconButton>
+            <Typography component='h5' variant='h5'>
+              {format(currentDate, "MMMM yyyy")}
+            </Typography>
+            <IconButton color='primary' onClick={nextMonth}>
+              <NavigateNextIcon />
+            </IconButton>
+            <ButtonGroup size='small' variant='contained' color='primary'>
+              <Button onClick={today}>Today</Button>
+              <Button onClick={() => setOpenPopup(true)}> + </Button>
+            </ButtonGroup>
           </Grid>
-        ))}
-      </div>
+          <WeekNames />
+          {data.map((week, key) => (
+            <Grid key={key} container wrap='nowrap'>
+              {week.map((day, key) => (
+                <Grid
+                  key={key}
+                  md={2}
+                  align='right'
+                  item
+                  className={`${classes.days} ${dayColor(day)}`}
+                  onClick={(e) => handleClick(e, day)}
+                >
+                  {format(day, "d")}
+                </Grid>
+              ))}
+            </Grid>
+          ))}
+        </Grid>
+        <Grid item>
+          <Typography align='center' variant='h6' component='h6'>
+            Your current availability
+          </Typography>
+          <TableContainer className={classes.table} component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Date </TableCell>
+                  <TableCell align='right'>Start</TableCell>
+                  <TableCell align='right'>End</TableCell>
+                  <TableCell align='right'>
+                    <IconButton>
+                      <DeleteForeverOutlinedIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {availability.map((data, key) => (
+                  <TableRow key={key}>
+                    <TableCell component='th' scope='row'>
+                      {format(data.date, "dd MMMM, yyyy")}
+                    </TableCell>
+                    <TableCell align='right'>{data.start}</TableCell>
+                    <TableCell align='right'>{data.end}</TableCell>
+                    <TableCell align='right'>
+                      <IconButton>
+                        <DeleteForeverOutlinedIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
         <TimeForm
           selectedDate={currentDate}
