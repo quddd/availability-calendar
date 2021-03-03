@@ -103,7 +103,13 @@ function Calendar() {
   return (
     <div>
       <div className={classes.calendar}>
-        <Grid container spacing={0} alignItems='center' justify='space-between'>
+        <Grid
+          container
+          spacing={0}
+          alignItems='center'
+          justify='center'
+          className={classes.controls}
+        >
           <IconButton color='primary' onClick={prevMonth}>
             <NavigateBeforeIcon />
           </IconButton>
@@ -130,11 +136,16 @@ function Calendar() {
                 className={`${classes.days} ${dayColor(day)}`}
                 onClick={(e) => handleClick(e, day)}
               >
-                {format(day, "d")}
+                {format(day, "dd")}
               </Grid>
             ))}
           </Grid>
         ))}
+        <div>
+          {availability.map((data, key) => (
+            <ul>{format(data.date, "d")}</ul>
+          ))}
+        </div>
       </div>
       <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
         <TimeForm

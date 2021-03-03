@@ -15,7 +15,13 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
 }));
-function TimeForm({ selectedDate, availability, setAvailability }) {
+function TimeForm({
+  selectedDate,
+  availability,
+  setAvailability,
+  events,
+  setEvents,
+}) {
   const [checked, setChecked] = useState(false);
   const [start, setStart] = useState("08:00");
   const [end, setEnd] = useState("16:00");
