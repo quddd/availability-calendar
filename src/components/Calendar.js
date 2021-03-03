@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   calendar: {
     maxWidth: 700,
   },
+  table: {
+    maxWidth: 100,
+  },
 }));
 
 function Calendar() {
@@ -148,8 +151,8 @@ function Calendar() {
           </Grid>
         ))}
       </div>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label='simple table'>
+      <TableContainer>
+        <Table className={classes.table}>
           <TableHead>
             <TableRow>
               <TableCell>Date </TableCell>
@@ -161,7 +164,7 @@ function Calendar() {
             {availability.map((data, key) => (
               <TableRow key={key}>
                 <TableCell component='th' scope='row'>
-                  {data.date}
+                  {format(data.date, "dd MMMM, yyyy")}
                 </TableCell>
                 <TableCell align='right'>{data.start}</TableCell>
                 <TableCell align='right'>{data.end}</TableCell>
