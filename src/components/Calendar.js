@@ -95,6 +95,13 @@ function Calendar() {
   const today = () => {
     setCurrentDate(new Date());
   };
+  const handleDelete = (e, key) => {
+    e.preventDefault();
+    setAvailability([
+      ...availability.slice(0, key),
+      ...availability.slice(key + 1),
+    ]);
+  };
   const WeekNames = () => {
     return (
       <Grid container wrap='nowrap'>
@@ -183,7 +190,11 @@ function Calendar() {
                     <TableCell align='right'>{data.start}</TableCell>
                     <TableCell align='right'>{data.end}</TableCell>
                     <TableCell align='right'>
-                      <IconButton>
+                      <IconButton
+                        onClick={(e) => {
+                          handleDelete(e, key);
+                        }}
+                      >
                         <DeleteForeverOutlinedIcon />
                       </IconButton>
                     </TableCell>

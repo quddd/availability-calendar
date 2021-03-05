@@ -48,7 +48,6 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
       end: end,
     };
     setAvailability([...availability, data]);
-    console.log(availability);
   };
   return (
     <div>
