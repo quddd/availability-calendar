@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   weekNames: {
     color: theme.palette.common.white,
-    background: "#262626",
+    background: "#292929",
     height: "4vh",
     minWidth: 50,
     padding: theme.spacing(0, 1),
