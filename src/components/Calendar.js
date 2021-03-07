@@ -161,6 +161,13 @@ function Calendar() {
                   onClick={(e) => handleClick(e, day)}
                 >
                   {format(day, "d")}
+                  {availability
+                    .filter((item) => isSameDay(item.date, day))
+                    .map((date, key) => (
+                      <div key={key}>
+                        {date.start} {date.end}
+                      </div>
+                    ))}
                 </Grid>
               ))}
             </Grid>
