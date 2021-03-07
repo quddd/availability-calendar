@@ -26,7 +26,7 @@ import {
 } from "date-fns";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import DeleteForeverOutlinedIcon from "@material-ui/icons/DeleteForeverOutlined";
+import DeleteIcon from "@material-ui/icons/Delete";
 import Popup from "./Popup";
 import TimeForm from "./TimeForm";
 
@@ -41,14 +41,14 @@ const useStyles = makeStyles((theme) => ({
   },
   weekNames: {
     color: theme.palette.common.white,
-    background: theme.palette.info.light,
+    background: "#292929",
     height: "4vh",
     minWidth: 50,
     padding: theme.spacing(0, 1),
     fontSize: theme.spacing(1.5),
   },
   currentDate: {
-    background: theme.palette.info.light,
+    background: "#266EF6",
     color: theme.palette.common.white,
   },
   notSameMonth: {
@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     maxHeight: "40vh",
     width: 400,
+  },
+  deleteIcon: {
+    color: "#800080",
   },
 }));
 
@@ -121,7 +124,7 @@ function Calendar() {
   };
   return (
     <div>
-      <Grid container direction='row' spacing={1}>
+      <Grid container direction='row' spacing={1} justify='center'>
         <Grid container item className={classes.calendar}>
           <Grid
             container
@@ -167,18 +170,18 @@ function Calendar() {
           <Typography align='center' variant='h6' component='h6'>
             Your current availability
           </Typography>
-          <TableContainer className={classes.table} component={Paper}>
+          <TableContainer
+            className={classes.table}
+            component={Paper}
+            elevation={6}
+          >
             <Table>
               <TableHead>
                 <TableRow>
                   <TableCell>Date </TableCell>
                   <TableCell align='right'>Start</TableCell>
                   <TableCell align='right'>End</TableCell>
-                  <TableCell align='right'>
-                    <IconButton>
-                      <DeleteForeverOutlinedIcon />
-                    </IconButton>
-                  </TableCell>
+                  <TableCell align='right'></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -195,7 +198,7 @@ function Calendar() {
                           handleDelete(e, key);
                         }}
                       >
-                        <DeleteForeverOutlinedIcon />
+                        <DeleteIcon className={classes.deleteIcon} />
                       </IconButton>
                     </TableCell>
                   </TableRow>
