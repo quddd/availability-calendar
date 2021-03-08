@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   days: {
     border: `1px solid ${theme.palette.grey[300]}`,
     height: "10vh",
-    minWidth: 50,
+    width: "14vw",
     padding: theme.spacing(0, 1),
     fontSize: "calc(3px + 1vmin)",
     cursor: "pointer",
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     background: "#292929",
     height: "4vh",
-    minWidth: 50,
+    width: "14vw",
     padding: theme.spacing(0, 1),
     fontSize: theme.spacing(1.5),
   },
@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
   table: {
     marginTop: theme.spacing(2),
     maxHeight: "40vh",
-    width: 400,
   },
   deleteIcon: {
     color: "#800080",
@@ -161,12 +160,21 @@ function Calendar() {
                   onClick={(e) => handleClick(e, day)}
                 >
                   {format(day, "d")}
+                  {/* filter availability for array*/}
                   {availability
                     .filter((item) => isSameDay(item.date, day))
                     .map((date, key) => (
-                      <div key={key}>
-                        {date.start} {date.end}
-                      </div>
+                      <Typography
+                        variant='body2'
+                        component='body1'
+                        display='block'
+                        noWrap
+                        align='left'
+                        item
+                        key={key}
+                      >
+                        {date.start}-{date.end}
+                      </Typography>
                     ))}
                 </Grid>
               ))}

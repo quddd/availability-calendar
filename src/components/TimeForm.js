@@ -8,7 +8,9 @@ import {
   makeStyles,
   Divider,
   Button,
+  Typography,
 } from "@material-ui/core";
+import { format } from "date-fns";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -52,6 +54,11 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
   return (
     <div>
       <Grid container>
+        <Grid item container justify='center'>
+          <Typography variant='body1' component='h4'>
+            Date: {format(selectedDate, "dd MMMM, yyyy")}
+          </Typography>
+        </Grid>
         <Grid item container justify='center'>
           <FormControlLabel
             control={
