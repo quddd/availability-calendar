@@ -10,7 +10,7 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
-import { format } from "date-fns";
+import { format, getMonth, getYear, getDate } from "date-fns";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -44,10 +44,17 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
     setEnd(e.target.value);
   };
   const handleSubmit = () => {
+    const month = getMonth(selectedDate); // extract month, year and date
+    const year = getYear(selectedDate);
+    const date = getDate(selectedDate);
+
+    const start_hour = parseInt(start.substring(0, 2)); // extract start hour and end hour
+    const start_minute = parseInt(start.substring(3));
+    const end_hour = parseInt(end.substring(0, 2));
+    const end_minute = parseInt(end.substring(3));
     const data = {
-      date: selectedDate,
-      start: start,
-      end: end,
+      start: new Date(year, month, date, start_hour, start_minute),
+      end: new Date(year, month, date, end_hour, end_minute),
     };
     setAvailability([...availability, data]);
   };

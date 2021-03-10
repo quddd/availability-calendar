@@ -162,18 +162,17 @@ function Calendar() {
                   {format(day, "d")}
                   {/* filter availability for array*/}
                   {availability
-                    .filter((item) => isSameDay(item.date, day))
+                    .filter((item) => isSameDay(item.start, day))
                     .map((date, key) => (
                       <Typography
                         variant='body2'
-                        component='body1'
+                        component='p'
                         display='block'
                         noWrap
                         align='left'
-                        item
                         key={key}
                       >
-                        {date.start}-{date.end}
+                        {format(date.start, "haaa")}-{format(date.end, "haaa")}
                       </Typography>
                     ))}
                 </Grid>
@@ -203,10 +202,14 @@ function Calendar() {
                 {availability.map((data, key) => (
                   <TableRow key={key}>
                     <TableCell component='th' scope='row'>
-                      {format(data.date, "dd MMMM, yyyy")}
+                      {format(data.start, "dd MMMM, yyyy")}
                     </TableCell>
-                    <TableCell align='right'>{data.start}</TableCell>
-                    <TableCell align='right'>{data.end}</TableCell>
+                    <TableCell align='right'>
+                      {format(data.start, "haaa")}
+                    </TableCell>
+                    <TableCell align='right'>
+                      {format(data.end, "haaa")}
+                    </TableCell>
                     <TableCell align='right'>
                       <IconButton
                         onClick={(e) => {
