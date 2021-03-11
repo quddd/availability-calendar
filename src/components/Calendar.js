@@ -41,8 +41,6 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
   weekNames: {
-    //color: theme.palette.common.white,
-    //background: "#292929",
     height: "4vh",
     width: "14vw",
     padding: theme.spacing(0, 1),
@@ -68,10 +66,15 @@ const useStyles = makeStyles((theme) => ({
   badge: {
     marginRight: theme.spacing(0.5),
     fontSize: "calc(1px + 1vmin)",
-    color: "green",
+    color: "#800080",
   },
   events: {
     fontSize: "calc(4px + 1vmin)",
+    fontWeight: "500",
+    "&:hover": {
+      background: "#A9BFCA",
+      borderRadius: "2px",
+    },
   },
 }));
 
@@ -145,8 +148,8 @@ function Calendar() {
             <IconButton color='primary' onClick={prevMonth}>
               <NavigateBeforeIcon />
             </IconButton>
-            <Typography component='p' variant='subtitle1'>
-              {format(currentDate, "MMMM yyyy")}
+            <Typography component='p' variant='h6'>
+              {format(currentDate, "MMM yyyy")}
             </Typography>
             <IconButton color='primary' onClick={nextMonth}>
               <NavigateNextIcon />
@@ -193,7 +196,7 @@ function Calendar() {
           ))}
         </Grid>
         <Grid item>
-          <Typography align='center' variant='subtitle1' component='p'>
+          <Typography align='center' variant='h6' component='p'>
             Your current availability
           </Typography>
           <TableContainer
