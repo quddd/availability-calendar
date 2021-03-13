@@ -149,7 +149,7 @@ function Calendar() {
               <NavigateBeforeIcon />
             </IconButton>
             <Typography component='p' variant='h6'>
-              {format(currentDate, "MMM yyyy")}
+              {format(currentDate, "MMM yy")}
             </Typography>
             <IconButton color='primary' onClick={nextMonth}>
               <NavigateNextIcon />
