@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { format, getMonth, getYear, getDate } from "date-fns";
+import Alert from "./Alert";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -21,6 +22,11 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
   const [checked, setChecked] = useState(false);
   const [start, setStart] = useState("08:00");
   const [end, setEnd] = useState("16:00");
+  const [alert, setAlert] = useState({
+    alert: false,
+    message: "",
+    severity: "",
+  });
   const classes = useStyles();
 
   //change start and end when checked changes
@@ -43,7 +49,7 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
   const handleEnd = (e) => {
     setEnd(e.target.value);
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const month = getMonth(selectedDate); // extract month, year and date
     const year = getYear(selectedDate);
     const date = getDate(selectedDate);
@@ -56,7 +62,21 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
       start: new Date(year, month, date, start_hour, start_minute),
       end: new Date(year, month, date, end_hour, end_minute),
     };
-    setAvailability([...availability, data]);
+    setAvailability([...availability, data])
+      .then(() => {
+        setAlert({
+          alert: true,
+          message: " Availability Added",
+          severity: "sucess",
+        });
+      })
+      .catch((error) => {
+        setAlert({
+          alert: true,
+          message: " Could not add availability",
+          severity: "error",
+        });
+      });
   };
   return (
     <div>
@@ -106,6 +126,7 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
             Add
           </Button>
         </Grid>
+        <Alert alert={alert} />
       </Grid>
     </div>
   );

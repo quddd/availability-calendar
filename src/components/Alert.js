@@ -9,11 +9,13 @@ function Alert(props) {
 function AlertMessage(props) {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [severity, setSeverity] = useState("");
 
   useEffect(() => {
-    if (props.alert.error) {
+    if (props.alert.alert) {
       setOpen(true);
       setMessage(props.alert.message);
+      setSeverity(props.alert.severity);
     } else {
       setOpen(false);
       setMessage("");
@@ -30,7 +32,7 @@ function AlertMessage(props) {
 
   return (
     <Snackbar open={open} autoHideDuration={60000} onClose={handleClose}>
-      <Alert onClose={handleClose} severity='error'>
+      <Alert onClose={handleClose} severity={severity}>
         {message}
       </Alert>
     </Snackbar>
