@@ -62,21 +62,12 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
       start: new Date(year, month, date, start_hour, start_minute),
       end: new Date(year, month, date, end_hour, end_minute),
     };
-    setAvailability([...availability, data])
-      .then(() => {
-        setAlert({
-          alert: true,
-          message: " Availability Added",
-          severity: "sucess",
-        });
-      })
-      .catch((error) => {
-        setAlert({
-          alert: true,
-          message: " Could not add availability",
-          severity: "error",
-        });
-      });
+    setAvailability([...availability, data]);
+    setAlert({
+      alert: true,
+      message: " Availability Added",
+      severity: "success",
+    });
   };
   return (
     <div>
