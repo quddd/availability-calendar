@@ -27,23 +27,22 @@ import {
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import DeleteIcon from "@material-ui/icons/Delete";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import Popup from "./Popup";
 import TimeForm from "./TimeForm";
 
 const useStyles = makeStyles((theme) => ({
   days: {
     border: `1px solid ${theme.palette.grey[300]}`,
-    height: "10vh",
-    minWidth: 50,
+    height: "12vh",
+    width: "14vw",
     padding: theme.spacing(0, 1),
-    fontSize: "calc(3px + 1vmin)",
+    fontSize: "calc(6px + 1vmin)",
     cursor: "pointer",
   },
   weekNames: {
-    color: theme.palette.common.white,
-    background: "#292929",
     height: "4vh",
-    minWidth: 50,
+    width: "14vw",
     padding: theme.spacing(0, 1),
     fontSize: theme.spacing(1.5),
   },
@@ -55,15 +54,27 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.grey[400],
   },
   calendar: {
-    maxWidth: 700,
+    maxWidth: 850,
   },
   table: {
     marginTop: theme.spacing(2),
-    maxHeight: "40vh",
-    width: 400,
+    maxHeight: "50vh",
   },
   deleteIcon: {
     color: "#800080",
+  },
+  badge: {
+    marginRight: theme.spacing(0.5),
+    fontSize: "calc(1px + 1vmin)",
+    color: "#800080",
+  },
+  events: {
+    fontSize: "calc(4px + 1vmin)",
+    fontWeight: "500",
+    "&:hover": {
+      background: "#A9BFCA",
+      borderRadius: "2px",
+    },
   },
 }));
 
@@ -137,8 +148,8 @@ function Calendar() {
             <IconButton color='primary' onClick={prevMonth}>
               <NavigateBeforeIcon />
             </IconButton>
-            <Typography component='h5' variant='h5'>
-              {format(currentDate, "MMMM yyyy")}
+            <Typography component='p' variant='h6'>
+              {format(currentDate, "MMM yy")}
             </Typography>
             <IconButton color='primary' onClick={nextMonth}>
               <NavigateNextIcon />
@@ -161,13 +172,31 @@ function Calendar() {
                   onClick={(e) => handleClick(e, day)}
                 >
                   {format(day, "d")}
+                  {/* filter availability for array*/}
+                  {availability
+                    .filter((item) => isSameDay(item.start, day))
+                    .map((date, key) => (
+                      <Grid key={key} container direction='row'>
+                        <Typography
+                          className={classes.events}
+                          variant='body2'
+                          component='p'
+                          display='block'
+                          noWrap
+                          align='left'
+                        >
+                          <FiberManualRecordIcon className={classes.badge} />
+                          {format(date.start, "h:mmaaa")}
+                        </Typography>
+                      </Grid>
+                    ))}
                 </Grid>
               ))}
             </Grid>
           ))}
         </Grid>
         <Grid item>
-          <Typography align='center' variant='h6' component='h6'>
+          <Typography align='center' variant='h6' component='p'>
             Your current availability
           </Typography>
           <TableContainer
@@ -188,10 +217,14 @@ function Calendar() {
                 {availability.map((data, key) => (
                   <TableRow key={key}>
                     <TableCell component='th' scope='row'>
-                      {format(data.date, "dd MMMM, yyyy")}
+                      {format(data.start, "dd MMMM, yyyy")}
                     </TableCell>
-                    <TableCell align='right'>{data.start}</TableCell>
-                    <TableCell align='right'>{data.end}</TableCell>
+                    <TableCell align='right'>
+                      {format(data.start, "haaa")}
+                    </TableCell>
+                    <TableCell align='right'>
+                      {format(data.end, "haaa")}
+                    </TableCell>
                     <TableCell align='right'>
                       <IconButton
                         onClick={(e) => {

@@ -8,7 +8,10 @@ import {
   makeStyles,
   Divider,
   Button,
+  Typography,
 } from "@material-ui/core";
+import { format, getMonth, getYear, getDate } from "date-fns";
+import Alert from "./Alert";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -19,6 +22,11 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
   const [checked, setChecked] = useState(false);
   const [start, setStart] = useState("08:00");
   const [end, setEnd] = useState("16:00");
+  const [alert, setAlert] = useState({
+    alert: false,
+    message: "",
+    severity: "",
+  });
   const classes = useStyles();
 
   //change start and end when checked changes
@@ -41,17 +49,34 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
   const handleEnd = (e) => {
     setEnd(e.target.value);
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const month = getMonth(selectedDate); // extract month, year and date
+    const year = getYear(selectedDate);
+    const date = getDate(selectedDate);
+
+    const start_hour = parseInt(start.substring(0, 2)); // extract start hour and end hour
+    const start_minute = parseInt(start.substring(3));
+    const end_hour = parseInt(end.substring(0, 2));
+    const end_minute = parseInt(end.substring(3));
     const data = {
-      date: selectedDate,
-      start: start,
-      end: end,
+      start: new Date(year, month, date, start_hour, start_minute),
+      end: new Date(year, month, date, end_hour, end_minute),
     };
     setAvailability([...availability, data]);
+    setAlert({
+      alert: true,
+      message: " Availability Added",
+      severity: "success",
+    });
   };
   return (
     <div>
       <Grid container>
+        <Grid item container justify='center'>
+          <Typography variant='body1' component='h4'>
+            Date: {format(selectedDate, "dd MMMM, yyyy")}
+          </Typography>
+        </Grid>
         <Grid item container justify='center'>
           <FormControlLabel
             control={
@@ -92,6 +117,7 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
             Add
           </Button>
         </Grid>
+        <Alert alert={alert} />
       </Grid>
     </div>
   );
