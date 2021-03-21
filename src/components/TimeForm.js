@@ -6,7 +6,6 @@ import {
   Grid,
   TextField,
   makeStyles,
-  Divider,
   Button,
   Typography,
 } from "@material-ui/core";
