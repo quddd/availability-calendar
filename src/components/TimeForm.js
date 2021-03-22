@@ -43,9 +43,19 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
     setChecked(!checked);
   };
   const handleStart = (e) => {
+    setAlert({
+      alert: false,
+      message: "",
+      severity: "",
+    });
     setStart(e.target.value);
   };
   const handleEnd = (e) => {
+    setAlert({
+      alert: false,
+      message: "",
+      severity: "",
+    });
     setEnd(e.target.value);
   };
   const handleSubmit = async () => {
@@ -67,6 +77,7 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
       message: " Availability Added",
       severity: "success",
     });
+    return;
   };
   return (
     <div>
