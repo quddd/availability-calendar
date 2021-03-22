@@ -31,7 +31,7 @@ function AlertMessage(props) {
   };
 
   return (
-    <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+    <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
       <Alert onClose={handleClose} severity={severity}>
         {message}
       </Alert>
