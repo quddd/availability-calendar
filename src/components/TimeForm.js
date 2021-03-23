@@ -9,7 +9,15 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
-import { format, getMonth, getYear, getDate } from "date-fns";
+import {
+  format,
+  getMonth,
+  getYear,
+  getDate,
+  isPast,
+  isSameDay,
+  isAfter,
+} from "date-fns";
 import Alert from "./Alert";
 
 const useStyles = makeStyles((theme) => ({
@@ -58,7 +66,25 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
     });
     setEnd(e.target.value);
   };
-  const handleSubmit = async () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //Date checking
+    if (!selectedDate) {
+      setAlert({
+        alert: true,
+        message: "Please Select Date!",
+        severity: "error",
+      });
+      return;
+    }
+    if (isPast(selectedDate) && !isSameDay(selectedDate, new Date())) {
+      setAlert({
+        alert: true,
+        message: "Can't add availability to past date",
+        severity: "error",
+      });
+      return;
+    }
     const month = getMonth(selectedDate); // extract month, year and date
     const year = getYear(selectedDate);
     const date = getDate(selectedDate);
@@ -71,6 +97,14 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
       start: new Date(year, month, date, start_hour, start_minute),
       end: new Date(year, month, date, end_hour, end_minute),
     };
+    if (isAfter(data.start, data.end)) {
+      setAlert({
+        alert: true,
+        message: "Invalid time interval. Start Time cannot be after End Time",
+        severity: "error",
+      });
+      return;
+    }
     setAvailability([...availability, data]);
     setAlert({
       alert: true,
