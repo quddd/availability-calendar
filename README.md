@@ -1,4 +1,5 @@
 # React Availability Calendar
+# Live Demo (https://availabilitycalendar.herokuapp.com/)
 
 Component allows users to select availability. Users can set availability for certain times during the day or for the whole day.
 ![Screen Shot 2021-03-18 at 7 04 57 PM](https://user-images.githubusercontent.com/24212950/111708968-2c15fe00-881d-11eb-98cb-365a47d67a33.png)
