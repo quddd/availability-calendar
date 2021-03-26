@@ -78,9 +78,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Calendar() {
+function Calendar({ availability, setAvailability }) {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [availability, setAvailability] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const classes = useStyles();
   const data = takeMonth(currentDate)();
