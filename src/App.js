@@ -1,5 +1,5 @@
 import Calendar from "./components/Calendar";
-import useState from "react";
+import { useState } from "react";
 
 function App() {
   const [availability, setAvailability] = useState([]);
