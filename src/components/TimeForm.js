@@ -85,10 +85,20 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
       });
       return;
     }
+    //check if start time is empty
     if (start === "") {
       setAlert({
         alert: true,
         message: "Please provide valid start time",
+        severity: "error",
+      });
+      return;
+    }
+    //check if end time is empty
+    if (end === "") {
+      setAlert({
+        alert: true,
+        message: "Please provide valid end time",
         severity: "error",
       });
       return;
