@@ -85,6 +85,14 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
       });
       return;
     }
+    if (start === "") {
+      setAlert({
+        alert: true,
+        message: "Please provide valid start time",
+        severity: "error",
+      });
+      return;
+    }
     const month = getMonth(selectedDate); // extract month, year and date
     const year = getYear(selectedDate);
     const date = getDate(selectedDate);
