@@ -85,6 +85,24 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
       });
       return;
     }
+    //check if start time is empty
+    if (start === "") {
+      setAlert({
+        alert: true,
+        message: "Please provide valid start time",
+        severity: "error",
+      });
+      return;
+    }
+    //check if end time is empty
+    if (end === "") {
+      setAlert({
+        alert: true,
+        message: "Please provide valid end time",
+        severity: "error",
+      });
+      return;
+    }
     const month = getMonth(selectedDate); // extract month, year and date
     const year = getYear(selectedDate);
     const date = getDate(selectedDate);
@@ -97,6 +115,27 @@ function TimeForm({ selectedDate, availability, setAvailability }) {
       start: new Date(year, month, date, start_hour, start_minute),
       end: new Date(year, month, date, end_hour, end_minute),
     };
+    /** check if the dates created are correct. This is mostly for safari 
+      Safari on Mac doesn't support the date/time pickers. It just display a text input field
+      This is to prevent adding invalid dates to the availability
+    */
+    if (data.start == "Invalid Date") {
+      setAlert({
+        alert: true,
+        message: "Start time must be in format HH:MM",
+        severity: "error",
+      });
+      return;
+    }
+    if (data.end == "Invalid Date") {
+      setAlert({
+        alert: true,
+        message: "End time must be in format HH:MM",
+        severity: "error",
+      });
+      return;
+    }
+    //check if start date is after end date
     if (isAfter(data.start, data.end)) {
       setAlert({
         alert: true,
