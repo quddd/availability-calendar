@@ -174,6 +174,7 @@ function Calendar({ availability, setAvailability }) {
                   {/* filter availability for array*/}
                   {availability
                     .filter((item) => isSameDay(item.start, day))
+                    .slice(0, 3)
                     .map((date, key) => (
                       <Grid key={key} container direction='row'>
                         <Typography
